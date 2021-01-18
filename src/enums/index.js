@@ -1,2 +1,2 @@
 export { PROPERTY_TYPE } from './propertyType';
-export { OCCPANCY } from './occupancy';
+export { OCCUPANCY } from './occupancy';
