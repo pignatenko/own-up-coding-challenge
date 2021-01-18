@@ -10,4 +10,10 @@ export function setLoanSize(loanSize){
 }
 
 export function setCreditScore(creditScore){
+  return {
+    type: `${FEATURE}/setCreditScore`,
+    payload: {
+      creditScore
+    }
+  };
 }
