@@ -1,9 +1,9 @@
 import { getRateQuote } from '../../adapters/rate_quote_api_adapter';
-const FEATURE = 'rateQuotes';
+import { FEATURE_NAME } from '.';
 
 function createSetterAction(name, payloadPropertyName, payload) {
   const action = {
-    type: `${FEATURE}/${name}`,
+    type: `${FEATURE_NAME}/${name}`,
     payload: {
     }
   };
