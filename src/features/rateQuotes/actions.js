@@ -26,3 +26,8 @@ export function setPropertyType(propertyType){
 export function setOccupancy(occupancy){
   return createSetterAction('setOccupancy', 'occupancy', occupancy);
 }
+
+export function getRateQuotes(loanSize, creditScore, propertyType, occupancy){
+  return (dispatch) => {
+  };
+}
