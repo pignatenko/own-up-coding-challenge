@@ -8,3 +8,6 @@ export function setLoanSize(loanSize){
     }
   };
 }
+
+export function setCreditScore(creditScore){
+}
