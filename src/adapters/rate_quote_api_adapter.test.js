@@ -2,39 +2,7 @@ import { getRateQuote } from "./rate_quote_api_adapter";
 import fetchMock from "fetch-mock-jest";
 import faker from "faker";
 import {PROPERTY_TYPE, OCCUPANCY} from '../enums';
-
-export function RateQuoteItemFactory({
-  lenderName = faker.company.companyName(),
-  loanType = faker.commerce.productName(),
-  interestRate = faker.random.float(),
-  closingCosts = faker.random.number(),
-  monthlyPayment = faker.random.float(),
-  apr = faker.random.float(),
-} = {}) {
-  return {
-    lenderName,
-    loanType,
-    interestRate,
-    closingCosts,
-    monthlyPayment,
-    apr,
-  };
-}
-
-function buildRateQuotes() {
-  return [
-    RateQuoteItemFactory(),
-    RateQuoteItemFactory(),
-    RateQuoteItemFactory(),
-  ];
-}
-
-export function RateQuoteFactory({ rateQuotes = buildRateQuotes() } = {}) {
-  return {
-    rateQuotes,
-  };
-}
-
+import { RateQuoteItemFactory, RateQuoteFactory } from '../factories/api/getRatesResponseFactory';
 
 describe('RateQuoteApiAdapter', () => {
   describe('#getRateQuote', () => {
