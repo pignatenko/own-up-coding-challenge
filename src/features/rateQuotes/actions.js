@@ -22,3 +22,7 @@ export function setCreditScore(creditScore){
 export function setPropertyType(propertyType){
   return createSetterAction('setPropertyType', 'propertyType', propertyType);
 }
+
+export function setOccupancy(occupancy){
+  return createSetterAction('setOccupancy', 'occupancy', occupancy);
+}

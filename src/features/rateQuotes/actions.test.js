@@ -1,6 +1,6 @@
 import faker from "faker";
 import {PROPERTY_TYPE, OCCUPANCY} from '../../enums';
-import { setLoanSize, setCreditScore, setPropertyType } from './actions';
+import { setLoanSize, setCreditScore, setPropertyType, setOccupancy } from './actions';
 
 describe('RateQuote Actions', () => {
   describe('#setLoanSize', () => {
@@ -49,6 +49,22 @@ describe('RateQuote Actions', () => {
     it('should create an action and set the payload.loanSize to be the given loan size', () => {
       const action = setPropertyType(propertyType);
       expect(action.payload.propertyType).toBe(propertyType);
+    });
+  });
+  describe('#setOccupancy', () => {
+    let occupancy;
+    beforeEach(() => {
+      occupancy = faker.random.arrayElement(OCCUPANCY);
+    });
+
+    it('should create an action with type rateQuotes/setOccupancy', () => {
+      const action = setOccupancy(occupancy);
+      expect(action.type).toBe('rateQuotes/setOccupancy');
+    });
+
+    it('should create an action and set the payload.loanSize to be the given loan size', () => {
+      const action = setOccupancy(occupancy);
+      expect(action.payload.occupancy).toBe(occupancy);
     });
   });
 });
