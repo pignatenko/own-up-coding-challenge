@@ -1,2 +1,10 @@
-export function setLoanSize(size){
+const FEATURE = 'rateQuotes';
+
+export function setLoanSize(loanSize){
+  return {
+    type: `${FEATURE}/setLoanSize`,
+    payload: {
+      loanSize
+    }
+  };
 }
