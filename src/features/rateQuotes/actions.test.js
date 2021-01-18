@@ -1,6 +1,12 @@
+jest.mock('../../adapters/rate_quote_api_adapter');
+
 import faker from "faker";
 import {PROPERTY_TYPE, OCCUPANCY} from '../../enums';
 import { setLoanSize, setCreditScore, setPropertyType, setOccupancy, setRateQuotes, setRateQuoteErrors, getRateQuotes } from './actions';
+import { getRateQuote } from '../../adapters/rate_quote_api_adapter';
+import { RateQuoteItemFactory, RateQuoteFactory } from '../../factories/api/getRatesResponseFactory';
+import { Response }  from "node-fetch";
+
 
 describe('RateQuote Actions', () => {
   describe('#setLoanSize', () => {
@@ -137,19 +143,67 @@ describe('RateQuote Actions', () => {
     });
 
     describe('when the middleware calls the inner function', () => {
+      let rateQuotes;
+      let response;
+      let dispatch;
+      beforeEach(() => {
+        dispatch = jest.fn();
+      });
+
       describe('and the call is valid', () => {
-        it('it calls the adapter to get rates', () => {
+        beforeEach(() => {
+          rateQuotes = [RateQuoteItemFactory()];
+          response = new Response(JSON.stringify(RateQuoteFactory({rateQuotes})));
+          getRateQuote.mockRestore();
+          getRateQuote.mockReturnValue(response);
         });
 
-        it('it dispatches a setRateQuotes action', () => {
+        it('it calls the adapter to get rates', async () => {
+          await getRateQuotes(loanSize, creditScore, propertyType, occupancy)(dispatch);
+          expect(getRateQuote.mock.calls.length).toBe(1);
+        });
+
+        it('it dispatches a setRateQuotes action', async () => {
+          await getRateQuotes(loanSize, creditScore, propertyType, occupancy)(dispatch);
+          expect(dispatch).toHaveBeenCalledWith(setRateQuotes(rateQuotes));
         });
       });
 
-      describe('and the call errors out', () => {
-        it('it calls the adapter to get rates', () => {
+      describe('and the server returns errors', () => {
+        let errors;
+        beforeEach(() => {
+          errors = ['Error'];
+          const errorBody = {
+            errors,
+          };
+          response = new Response(JSON.stringify(errorBody), {status: 400});
+          getRateQuote.mockRestore();
+          getRateQuote.mockReturnValue(response);
         });
 
-        it('it dispatches a setRateQuotesError action', () => {
+        it('it calls the adapter to get rates', async () => {
+          await getRateQuotes(loanSize, creditScore, propertyType, occupancy)(dispatch);
+          expect(getRateQuote.mock.calls.length).toBe(1);
+        });
+
+        it('it dispatches a setRateQuotesError action', async() => {
+          await getRateQuotes(loanSize, creditScore, propertyType, occupancy)(dispatch);
+          expect(dispatch).toHaveBeenCalledWith(setRateQuoteErrors(errors));
+        });
+      });
+
+      describe('and the call promise fails', () => {
+        let errors;
+        beforeEach(() => {
+          const error = new Error('My Cool Message');
+          errors = [ error.message ];
+          getRateQuote.mockRestore();
+          getRateQuote.mockReturnValue(Promise.reject(error));
+        });
+
+        it('it dispatches a setRateQuotesError action with the Error.message', async() => {
+          await getRateQuotes(loanSize, creditScore, propertyType, occupancy)(dispatch);
+          expect(dispatch).toHaveBeenCalledWith(setRateQuoteErrors(errors));
         });
       });
     })
