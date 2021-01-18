@@ -1,6 +1,6 @@
 import faker from "faker";
 import {PROPERTY_TYPE, OCCUPANCY} from '../../enums';
-import { setLoanSize, setCreditScore, setPropertyType, setOccupancy, getRateQuotes } from './actions';
+import { setLoanSize, setCreditScore, setPropertyType, setOccupancy, setRateQuotes, setRateQuoteErrors, getRateQuotes } from './actions';
 
 describe('RateQuote Actions', () => {
   describe('#setLoanSize', () => {
@@ -30,7 +30,7 @@ describe('RateQuote Actions', () => {
       expect(action.type).toBe('rateQuotes/setCreditScore');
     });
 
-    it('should create an action and set the payload.loanSize to be the given loan size', () => {
+    it('should create an action and set the payload.creditScore to be the given credit score', () => {
       const action = setCreditScore(creditScore);
       expect(action.payload.creditScore).toBe(creditScore);
     });
@@ -46,7 +46,7 @@ describe('RateQuote Actions', () => {
       expect(action.type).toBe('rateQuotes/setPropertyType');
     });
 
-    it('should create an action and set the payload.loanSize to be the given loan size', () => {
+    it('should create an action and set the payload.propertyType to be the given propertyType', () => {
       const action = setPropertyType(propertyType);
       expect(action.payload.propertyType).toBe(propertyType);
     });
@@ -62,11 +62,62 @@ describe('RateQuote Actions', () => {
       expect(action.type).toBe('rateQuotes/setOccupancy');
     });
 
-    it('should create an action and set the payload.loanSize to be the given loan size', () => {
+    it('should create an action and set the payload.occupancy to be the given occupancy', () => {
       const action = setOccupancy(occupancy);
       expect(action.payload.occupancy).toBe(occupancy);
     });
   });
+  describe('#setRateQuotes', () => {
+    let rateQuotes;
+    beforeEach(() => {
+      rateQuotes = faker.random.arrayElement(OCCUPANCY);
+    });
+
+    it('should create an action with type rateQuotes/setOccupancy', () => {
+      const action = setRateQuotes(rateQuotes);
+      expect(action.type).toBe('rateQuotes/setRateQuotes');
+    });
+
+    it('should create an action and set the payload.rateQuotes to be the given rate quotes', () => {
+      const action = setRateQuotes(rateQuotes);
+      expect(action.payload.rateQuotes).toBe(rateQuotes);
+    });
+  });
+
+  describe('#setRateQuotes', () => {
+    let rateQuotes;
+    beforeEach(() => {
+      rateQuotes = faker.random.arrayElement(OCCUPANCY);
+    });
+
+    it('should create an action with type rateQuotes/setOccupancy', () => {
+      const action = setRateQuotes(rateQuotes);
+      expect(action.type).toBe('rateQuotes/setRateQuotes');
+    });
+
+    it('should create an action and set the payload.loanSize to be the given loan size', () => {
+      const action = setRateQuotes(rateQuotes);
+      expect(action.payload.rateQuotes).toBe(rateQuotes);
+    });
+  });
+
+  describe('#setRateQuoteErrors', () => {
+    let rateQuoteErrors;
+    beforeEach(() => {
+      rateQuoteErrors = ['Fake Error Message'];
+    });
+
+    it('should create an action with type rateQuotes/setRateQuoteErrors', () => {
+      const action = setRateQuoteErrors(rateQuoteErrors);
+      expect(action.type).toBe('rateQuotes/setRateQuoteErrors');
+    });
+
+    it('should create an action and set the payload.errors to be the given errors', () => {
+      const action = setRateQuoteErrors(rateQuoteErrors);
+      expect(action.payload.rateQuoteErrors).toBe(rateQuoteErrors);
+    });
+  });
+
   describe('#getRateQuotes', () => {
     let loanSize;
     let creditScore;
@@ -84,5 +135,23 @@ describe('RateQuote Actions', () => {
       const action = getRateQuotes(loanSize, creditScore, propertyType, occupancy);
       expect(typeof action).toBe('function');
     });
+
+    describe('when the middleware calls the inner function', () => {
+      describe('and the call is valid', () => {
+        it('it calls the adapter to get rates', () => {
+        });
+
+        it('it dispatches a setRateQuotes action', () => {
+        });
+      });
+
+      describe('and the call errors out', () => {
+        it('it calls the adapter to get rates', () => {
+        });
+
+        it('it dispatches a setRateQuotesError action', () => {
+        });
+      });
+    })
   });
 });
