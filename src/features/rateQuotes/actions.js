@@ -17,3 +17,6 @@ export function setCreditScore(creditScore){
     }
   };
 }
+
+export function setPropertyType(propertyType){
+}
