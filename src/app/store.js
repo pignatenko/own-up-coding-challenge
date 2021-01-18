@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { reduceRateQuotes } from '../features/rateQuotes/reducers';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    rateQuotes: reduceRateQuotes,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware,
 });
