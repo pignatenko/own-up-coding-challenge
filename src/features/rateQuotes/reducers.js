@@ -16,7 +16,7 @@ function reduceActionPayload(eventName, state, action) {
 
 
 export const initialSetLoanSizeState = {
-  loanSize: 0,
+  loanSize: 250000,
 }
 
 export function reduceSetLoanSize(state = initialSetLoanSizeState, action) {
@@ -24,7 +24,7 @@ export function reduceSetLoanSize(state = initialSetLoanSizeState, action) {
 }
 
 export const initialSetCreditScoreState = {
-  creditScore: 600
+  creditScore: 600,
 }
 
 export function reduceSetCreditScore(state = initialSetCreditScoreState, action){
@@ -52,6 +52,10 @@ export const initialSetRateQuotesState = {
 };
 
 export function reduceSetRateQuotes(state = initialSetRateQuotesState, action){
+  if (action.payload && action.payload.rateQuotes) {
+    action.payload.rateQuotes.forEach((r, idx) => r.id = idx+1);
+  }
+
   return reduceActionPayload(`${FEATURE_NAME}/setRateQuotes`, state, action);
 }
 

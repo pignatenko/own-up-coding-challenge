@@ -107,8 +107,20 @@ describe('RateQuote Reducers', () => {
     });
   });
 
-  describe(`#reduceRateQuotes`, () => {
+  describe("#reduceSetRateQuotes", () => {
+    it('adds an id attribute for Material UI DataGrid requirements', () => {
+      const action = {
+        type: 'rateQuotes/setRateQuotes',
+        payload: {
+          rateQuotes: [ RateQuoteItemFactory(), RateQuoteItemFactory() ],
+        }
+      };
 
+      const newState = reduceSetRateQuotes({}, action);
+      expect(newState.rateQuotes.every(r => r.id)).toBeTruthy();
+    });
+  });
+  describe(`#reduceRateQuotes`, () => {
     it(`does not trigger on unhandled actions`, () => {
       const newState = reduceRateQuotes(initialRateQuotesState, wrongAction);
       expect(newState).toBe(initialRateQuotesState);
