@@ -5,5 +5,5 @@ export default configureStore({
   reducer: {
     rateQuotes: reduceRateQuotes,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
