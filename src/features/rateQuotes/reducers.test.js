@@ -1,4 +1,4 @@
-import {OCCUPANCY, PROPERTY_TYPE} from '../../enums';
+import { OCCUPANCY, PROPERTY_TYPE } from "../../enums";
 import { RateQuoteItemFactory } from "../../factories/api/getRatesResponseFactory";
 
 import {
@@ -18,20 +18,20 @@ import {
   initialRateQuotesState,
 } from "./reducers";
 
-describe('RateQuote Reducers', () => {
+describe("RateQuote Reducers", () => {
   let action;
   let state;
   const wrongAction = {
-    type: 'noSuchFeature/noSuchEvent',
+    type: "noSuchFeature/noSuchEvent",
     payload: {
       nothing: 123,
-    }
+    },
   };
   const tests = [
     {
       function: reduceSetLoanSize,
       initial: initialSetLoanSizeState,
-      type: 'rateQuotes/setLoanSize',
+      type: "rateQuotes/setLoanSize",
       payload: {
         loanSize: 100000,
       },
@@ -39,7 +39,7 @@ describe('RateQuote Reducers', () => {
     {
       function: reduceSetCreditScore,
       initial: initialSetCreditScoreState,
-      type: 'rateQuotes/setCreditScore',
+      type: "rateQuotes/setCreditScore",
       payload: {
         creditScore: 800,
       },
@@ -47,7 +47,7 @@ describe('RateQuote Reducers', () => {
     {
       function: reduceSetOccupancy,
       initial: initialSetOccupancyState,
-      type: 'rateQuotes/setOccupancy',
+      type: "rateQuotes/setOccupancy",
       payload: {
         occupancy: OCCUPANCY.Secondary,
       },
@@ -55,7 +55,7 @@ describe('RateQuote Reducers', () => {
     {
       function: reduceSetPropertyType,
       initial: initialSetPropertyTypeState,
-      type: 'rateQuotes/setPropertyType',
+      type: "rateQuotes/setPropertyType",
       payload: {
         propertyType: PROPERTY_TYPE.Condo,
       },
@@ -63,26 +63,25 @@ describe('RateQuote Reducers', () => {
     {
       function: reduceSetRateQuotes,
       initial: initialSetRateQuotesState,
-      type: 'rateQuotes/setRateQuotes',
+      type: "rateQuotes/setRateQuotes",
       payload: {
-        rateQuotes: [ RateQuoteItemFactory() ],
+        rateQuotes: [RateQuoteItemFactory()],
       },
     },
     {
       function: reduceSetRateQuoteErrors,
       initial: initialSetRateQuoteErrorsState,
-      type: 'rateQuotes/setRateQuoteErrors',
+      type: "rateQuotes/setRateQuoteErrors",
       payload: {
-        rateQuoteErrors: ['Something went wrong'],
+        rateQuoteErrors: ["Something went wrong"],
       },
     },
-  ]
+  ];
 
-
-  tests.forEach(test => {
+  tests.forEach((test) => {
     describe(`#${test.function.name}`, () => {
       beforeEach(() => {
-        state = {}
+        state = {};
         action = {
           type: test.type,
           payload: test.payload,
@@ -108,16 +107,16 @@ describe('RateQuote Reducers', () => {
   });
 
   describe("#reduceSetRateQuotes", () => {
-    it('adds an id attribute for Material UI DataGrid requirements', () => {
+    it("adds an id attribute for Material UI DataGrid requirements", () => {
       const action = {
-        type: 'rateQuotes/setRateQuotes',
+        type: "rateQuotes/setRateQuotes",
         payload: {
-          rateQuotes: [ RateQuoteItemFactory(), RateQuoteItemFactory() ],
-        }
+          rateQuotes: [RateQuoteItemFactory(), RateQuoteItemFactory()],
+        },
       };
 
       const newState = reduceSetRateQuotes({}, action);
-      expect(newState.rateQuotes.every(r => r.id)).toBeTruthy();
+      expect(newState.rateQuotes.every((r) => r.id)).toBeTruthy();
     });
   });
   describe(`#reduceRateQuotes`, () => {
@@ -131,9 +130,9 @@ describe('RateQuote Reducers', () => {
       expect(newState).toBe(initialRateQuotesState);
     });
 
-    tests.forEach(test => {
+    tests.forEach((test) => {
       beforeEach(() => {
-        state = {}
+        state = {};
         action = {
           type: test.type,
           payload: test.payload,

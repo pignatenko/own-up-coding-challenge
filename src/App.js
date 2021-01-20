@@ -1,7 +1,6 @@
-import React from 'react';
-import { RateQuotes } from './features/rateQuotes';
-import './App.css';
-
+import React from "react";
+import { RateQuotes } from "./features/rateQuotes";
+import "./App.css";
 
 function App() {
   return (

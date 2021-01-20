@@ -31,5 +31,3 @@ export function RateQuoteFactory({ rateQuotes = buildRateQuotes() } = {}) {
     rateQuotes,
   };
 }
-
-

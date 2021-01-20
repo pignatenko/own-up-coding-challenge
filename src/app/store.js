@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { reduceRateQuotes } from '../features/rateQuotes/reducers';
+import { configureStore } from "@reduxjs/toolkit";
+import { reduceRateQuotes } from "../features/rateQuotes/reducers";
 
 export default configureStore({
   reducer: {
