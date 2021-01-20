@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "lenderName": "TFB Federal Credit Union",
+    "loanType": "7/1 ARM",
+    "interestRate": 3.125,
+    "closingCosts": 3000,
+    "monthlyPayment": 856.750903676513,
+    "apr": 3.242614580153712
+  },
+  {
+    "id": 2,
+    "lenderName": "TFB Federal Credit Union",
+    "loanType": "10/1 ARM",
+    "interestRate": 3.25,
+    "closingCosts": 3000,
+    "monthlyPayment": 870.4126381447652,
+    "apr": 3.3684625120113205
+  },
+  {
+    "id": 3,
+    "lenderName": "TFB Federal Credit Union",
+    "loanType": "30YR Fixed",
+    "interestRate": 3.5,
+    "closingCosts": 3000,
+    "monthlyPayment": 898.089375617647,
+    "apr": 3.6201853894781384
+  }
+]

@@ -1,5 +1,5 @@
 import { RateQuoteControls } from './controls';
-// import { RateQuoteList } from './list';
+import { RateQuoteList } from './list';
 import { Container } from '@material-ui/core';
 
 export const FEATURE_NAME = 'rateQuotes';
@@ -12,7 +12,7 @@ export function RateQuotes() {
       </Container>
 
       <Container>
-        {/* <RateQuoteList/> */}
+        <RateQuoteList/>
       </Container>
     </div>
 
