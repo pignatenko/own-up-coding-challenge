@@ -98,6 +98,11 @@ describe("RateQuote Actions", () => {
       const action = setRateQuotes(rateQuotes);
       expect(action.payload.rateQuotes).toBe(rateQuotes);
     });
+
+    it("should create an action and set the payload.rateQuoteErrors to be an empty list", () => {
+      const action = setRateQuotes(rateQuotes);
+      expect(action.payload.rateQuoteErrors).toStrictEqual([]);
+    });
   });
 
   describe("#setRateQuotes", () => {
@@ -131,6 +136,11 @@ describe("RateQuote Actions", () => {
     it("should create an action and set the payload.errors to be the given errors", () => {
       const action = setRateQuoteErrors(rateQuoteErrors);
       expect(action.payload.rateQuoteErrors).toBe(rateQuoteErrors);
+    });
+
+    it("should create an action and set the payload.rateQuotes to be an empty list", () => {
+      const action = setRateQuoteErrors(rateQuoteErrors);
+      expect(action.payload.rateQuotes).toStrictEqual([]);
     });
   });
 

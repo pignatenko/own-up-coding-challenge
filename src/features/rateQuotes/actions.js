@@ -29,11 +29,15 @@ export function setOccupancy(occupancy){
 }
 
 export function setRateQuotes(rateQuotes){
-  return createSetterAction('setRateQuotes', 'rateQuotes', rateQuotes);
+  const action = createSetterAction('setRateQuotes', 'rateQuotes', rateQuotes);
+  action.payload.rateQuoteErrors = [];
+  return action;
 }
 
 export function setRateQuoteErrors(rateQuoteErrors){
-  return createSetterAction('setRateQuoteErrors', 'rateQuoteErrors', rateQuoteErrors);
+  const action = createSetterAction('setRateQuoteErrors', 'rateQuoteErrors', rateQuoteErrors);
+  action.payload.rateQuotes = [];
+  return action;
 }
 
 export function getRateQuotes(loanSize, creditScore, propertyType, occupancy){
