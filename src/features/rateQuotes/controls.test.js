@@ -2,13 +2,11 @@ jest.mock('lodash/debounce', () => jest.fn(fn => fn));
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import Enzyme, { render } from 'enzyme';
+import { render } from 'enzyme';
 import { createMount } from  '@material-ui/core/test-utils';
 import { RateQuoteControls } from './controls';
 import {PROPERTY_TYPE, OCCUPANCY} from '../../enums';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import * as Actions from './actions';
-Enzyme.configure({adapter: new Adapter()});
 const MockStore = configureStore([]);
 
 describe("<RateQuoteControls />", () => {
